@@ -1,0 +1,436 @@
+/* ═══════════════════════════════════════════════════════
+   FOOTER — MAXIMUM LEVEL
+═══════════════════════════════════════════════════════ */
+
+.ft {
+  position: relative;
+  padding: 120px 0 0;
+  background: var(--bg-primary);
+  overflow: hidden;
+  isolation: isolate;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* ── Ambient BG ── */
+.ft__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ft__bg-orb {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  bottom: -400px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(230,57,70,0.08) 0%, rgba(230,57,70,0) 70%);
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.ft__bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: linear-gradient(to top, black 20%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 20%, transparent 100%);
+}
+
+.ft__scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(230,57,70,0.5), transparent);
+  box-shadow: 0 0 20px rgba(230,57,70,0.8);
+  opacity: 0.5;
+  animation: ftScan 8s linear infinite;
+  z-index: 1;
+}
+
+@keyframes ftScan {
+  0% { top: -10%; opacity: 0; }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% { top: 110%; opacity: 0; }
+}
+
+/* ── Container ── */
+.ft__container {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ft__container--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ft__grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1.4fr;
+  gap: 60px;
+  margin-bottom: 80px;
+}
+
+/* ── Brand ── */
+.ft__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  text-decoration: none;
+  position: relative;
+}
+
+.ft__logo-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 10px rgba(230,57,70,0.6));
+}
+
+.ft__logo-text {
+  font-family: var(--font-heading, 'Barlow Condensed', sans-serif);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.ft__logo-accent {
+  color: #e63946;
+}
+
+.ft__brand-desc {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  max-width: 320px;
+  font-weight: 300;
+}
+
+/* Socials */
+.ft__socials {
+  display: flex;
+  gap: 14px;
+}
+
+.ft__social {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ft__social::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(230,57,70,0.4) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.ft__social svg {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s ease, color 0.4s ease;
+}
+
+.ft__social:hover {
+  border-color: rgba(230,57,70,0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.ft__social:hover::before { opacity: 1; }
+.ft__social:hover svg { color: #fff; transform: scale(1.1); }
+
+/* ── Links ── */
+.ft__heading {
+  font-family: var(--font-heading, 'Barlow Condensed', sans-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #F2F0E8;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.ft__heading::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: #e63946;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.ft__links-group:hover .ft__heading::after {
+  width: 100%;
+  background: linear-gradient(90deg, #e63946, transparent);
+}
+
+.ft__links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ft__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.ft__link-arrow {
+  font-size: 0.7rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  color: #e63946;
+}
+
+.ft__link:hover {
+  color: #fff;
+  transform: translateX(6px);
+}
+
+.ft__link:hover .ft__link-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Newsletter ── */
+.ft__newsletter-desc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.ft__form {
+  position: relative;
+  display: flex;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.ft__form:focus-within {
+  border-color: rgba(230,57,70,0.5);
+  box-shadow: 0 0 20px rgba(230,57,70,0.1);
+}
+
+.ft__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px 16px;
+  color: #fff;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.ft__input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.ft__submit {
+  background: #e63946;
+  border: none;
+  width: 44px;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ft__submit::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.ft__submit:hover {
+  background: #f04b57;
+}
+
+.ft__submit:hover::after {
+  left: 200%;
+}
+
+.ft__submit svg {
+  width: 18px; height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.ft__submit:hover svg {
+  transform: translateX(2px) scale(1.1);
+}
+
+/* ── Bottom Strip ── */
+.ft__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 30px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.ft__bottom::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 0;
+  width: 30%; height: 1px;
+  background: linear-gradient(90deg, transparent, #e63946, transparent);
+  opacity: 0.5;
+}
+
+.ft__copy {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.ft__copy strong {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+}
+
+.ft__legal {
+  display: flex;
+  gap: 32px;
+}
+
+.ft__legal-link {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.ft__legal-link:hover {
+  color: #e63946;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .ft__grid {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 60px;
+  }
+}
+
+/* ════ MOBILE FOOTER ════
+   Only show: logo, brand desc, socials, copyright strip.
+   Hide: Navigation links, Disciplines, Newsletter.
+════════════════════════ */
+@media (max-width: 768px) {
+  .ft {
+    padding: 60px 0 0;
+  }
+
+  /* Hide secondary columns */
+  .ft__links-group,
+  .ft__newsletter {
+    display: none;
+  }
+
+  /* Brand column: centered + compact */
+  .ft__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+
+  .ft__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
+  }
+
+  .ft__logo {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+
+  .ft__brand-desc {
+    font-size: 0.82rem;
+    max-width: 300px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 20px;
+  }
+
+  .ft__socials {
+    justify-content: center;
+  }
+
+  /* Bottom strip: stacked */
+  .ft__bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    text-align: center;
+  }
+
+  .ft__copy {
+    font-size: 0.75rem;
+  }
+
+  /* Hide legal links on mobile — too cluttered */
+  .ft__legal {
+    display: none;
+  }
+}

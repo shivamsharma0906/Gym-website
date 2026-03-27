@@ -1,0 +1,381 @@
+/* ═══════════════════════════════════════════════════════
+   TRAINERS — MAXIMUM LEVEL
+═══════════════════════════════════════════════════════ */
+
+.tr {
+  position: relative;
+  padding: 120px 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--bg-primary);
+}
+
+/* ── Ambient Glow ── */
+.tr__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1000px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, rgba(230, 57, 70, 0.05) 0%, transparent 60%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tr__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tr__container--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Header ── */
+.tr__header {
+  text-align: center;
+  margin-bottom: 70px;
+  position: relative;
+}
+
+.tr__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 18px;
+  background: rgba(230, 57, 70, 0.08);
+  border: 1px solid rgba(230, 57, 70, 0.3);
+  border-radius: 100px;
+  font-family: var(--font-heading, 'Barlow Condensed', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e63946;
+  margin-bottom: 20px;
+}
+
+.tr__eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e63946;
+  box-shadow: 0 0 10px #e63946;
+  animation: trPulse 2s infinite;
+}
+
+@keyframes trPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.tr__title {
+  font-family: var(--font-heading, 'Barlow Condensed', sans-serif);
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 900;
+  color: #F2F0E8;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.tr__title-accent {
+  background: linear-gradient(135deg, #e63946, #f77f00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tr__subtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.4);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── Grid ── */
+.tr__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  width: 100%;
+}
+
+/* ── Card ── */
+.tr__card {
+  position: relative;
+  background: rgba(14, 14, 14, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.tr__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--tc-color) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+.tr__card:hover {
+  transform: translateY(-12px);
+  border-color: color-mix(in srgb, var(--tc-color) 40%, transparent);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 40px color-mix(in srgb, var(--tc-color) 15%, transparent);
+}
+
+.tr__card:hover::before {
+  opacity: 0.08;
+}
+
+/* ── Avatar ── */
+.tr__avatar {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  z-index: 1;
+}
+
+.tr__avatar-emoji {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tr__card:hover .tr__avatar-emoji {
+  transform: scale(1.15) translateY(-4px);
+}
+
+.tr__ring-1, .tr__ring-2 {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: border-color 0.5s ease;
+}
+
+.tr__ring-1 {
+  inset: 0;
+  border-top-color: rgba(255,255,255,0.1);
+  border-bottom-color: rgba(255,255,255,0.02);
+  animation: trSpin 8s linear infinite;
+}
+
+.tr__ring-2 {
+  inset: -12px;
+  border-left-color: rgba(255,255,255,0.05);
+  border-right-color: rgba(255,255,255,0.02);
+  animation: trSpin 12s linear infinite reverse;
+}
+
+.tr__card:hover .tr__ring-1 {
+  border-top-color: var(--tc-color);
+  border-bottom-color: color-mix(in srgb, var(--tc-color) 20%, transparent);
+  animation-duration: 4s;
+}
+
+.tr__card:hover .tr__ring-2 {
+  border-left-color: color-mix(in srgb, var(--tc-color) 60%, transparent);
+  border-right-color: color-mix(in srgb, var(--tc-color) 10%, transparent);
+  animation-duration: 6s;
+}
+
+@keyframes trSpin {
+  100% { transform: rotate(360deg); }
+}
+
+/* ── Info ── */
+.tr__info {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.tr__name {
+  font-family: var(--font-heading, 'Barlow Condensed', sans-serif);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #F2F0E8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.tr__role {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--tc-color);
+  margin-bottom: 24px;
+}
+
+/* ── Stats ── */
+.tr__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+  width: 100%;
+}
+
+.tr__stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.tr__card:hover .tr__stat {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.tr__stat-lbl {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.tr__stat-val {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Socials ── */
+.tr__socials {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.tr__social {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.tr__social svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s;
+}
+
+.tr__card:hover .tr__social {
+  border-color: color-mix(in srgb, var(--tc-color) 40%, transparent);
+}
+
+.tr__social:hover {
+  background: var(--tc-color);
+  border-color: var(--tc-color) !important;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px color-mix(in srgb, var(--tc-color) 40%, transparent);
+}
+
+.tr__social:hover svg {
+  transform: scale(1.1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .tr__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tr {
+    padding: 80px 0;
+  }
+
+  .tr__title {
+    font-size: 3rem;
+  }
+  
+  .tr__grid {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 24px;
+    padding: 10px 24px 40px;
+    margin: 0 -24px; /* break out of global container padding */
+    width: calc(100% + 48px);
+    gap: 16px;
+    
+    /* Hide scrollbar securely */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .tr__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Override Card3D wrapper constraints on mobile */
+  .tr__grid > div {
+    flex: 0 0 85%;
+    min-width: 280px;
+    max-width: 360px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .tr__grid::after {
+    /* Spacer to allow scrolling past the very last card fluidly */
+    content: '';
+    flex: 0 0 1px;
+  }
+
+  .tr__card {
+    height: 100%; /* Ensure equal heights in row */
+  }
+  
+  /* On touch devices, having to tap to see hover states is clunky. 
+     Let's apply a slight ambient activation so they already look premium */
+  .tr__card {
+    border-color: color-mix(in srgb, var(--tc-color) 20%, transparent);
+    background: rgba(14, 14, 14, 0.7);
+  }
+}

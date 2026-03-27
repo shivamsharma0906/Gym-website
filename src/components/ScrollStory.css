@@ -1,0 +1,313 @@
+/* ===== Scroll Story ===== */
+.scroll-story {
+  position: relative;
+  height: 300vh; /* 3 sections x 100vh scroll space */
+}
+
+.scroll-story__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background glow */
+.scroll-story__bg {
+  position: absolute;
+  inset: 0;
+  transition: background 0.8s ease;
+  pointer-events: none;
+}
+
+/* Progress bar */
+.scroll-story__progress {
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 200px;
+  background: var(--border-subtle);
+  border-radius: 3px;
+  z-index: 10;
+}
+
+.scroll-story__progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--gradient-primary);
+  border-radius: 3px;
+  transition: height 0.1s linear;
+}
+
+.scroll-story__progress-dot {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-light);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.scroll-story__progress-dot--active {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 12px rgba(230, 57, 70, 0.5);
+}
+
+/* Step indicators */
+.scroll-story__steps {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 32px;
+  z-index: 10;
+}
+
+.scroll-story__step {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1px solid transparent;
+}
+
+.scroll-story__step--active {
+  color: var(--primary);
+  border-color: var(--border-accent);
+  background: rgba(230, 57, 70, 0.08);
+}
+
+/* Content panels */
+.scroll-story__panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.1s linear, transform 0.1s linear;
+}
+
+.scroll-story__panel-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1200px;
+  padding: 0 60px;
+  width: 100%;
+  align-items: center;
+}
+
+.scroll-story__panel-tag {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(230, 57, 70, 0.1);
+  border: 1px solid var(--border-accent);
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.scroll-story__panel-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+}
+
+.scroll-story__panel-subtitle {
+  font-size: 1.2rem;
+  color: var(--primary-light);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.scroll-story__panel-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 36px;
+}
+
+/* Stats */
+.scroll-story__panel-stats {
+  display: flex;
+  gap: 36px;
+}
+
+.scroll-story__panel-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-story__panel-stat-value {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.scroll-story__panel-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* Visual / Right Side */
+.scroll-story__panel-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-story__panel-visual {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-story__panel-emoji {
+  font-size: 7rem;
+  filter: drop-shadow(0 0 40px rgba(230, 57, 70, 0.3));
+  animation: float 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+.scroll-story__panel-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+}
+
+.scroll-story__panel-ring--1 {
+  width: 200px;
+  height: 200px;
+  border-color: var(--border-accent);
+  animation: spin 15s linear infinite;
+}
+
+.scroll-story__panel-ring--2 {
+  width: 280px;
+  height: 280px;
+  border-color: var(--border-subtle);
+  animation: spin 25s linear infinite reverse;
+}
+
+.scroll-story__panel-ring--3 {
+  width: 360px;
+  height: 360px;
+  border-color: rgba(255,255,255,0.03);
+  animation: spin 35s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Scroll hint */
+.scroll-story__hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: opacity 0.5s ease;
+  z-index: 10;
+}
+
+.scroll-story__hint-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--primary));
+  animation: scrollLineAnim 2s ease-in-out infinite;
+}
+
+@keyframes scrollLineAnim {
+  0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .scroll-story__panel-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .scroll-story__panel-right {
+    display: none;
+  }
+
+  .scroll-story__panel-stats {
+    justify-content: center;
+  }
+
+  .scroll-story__progress {
+    left: 20px;
+    height: 150px;
+  }
+
+  .scroll-story__steps {
+    gap: 16px;
+  }
+
+  .scroll-story__step {
+    font-size: 0.6rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-story__steps {
+    gap: 8px;
+  }
+
+  .scroll-story__panel-stats {
+    gap: 20px;
+  }
+}

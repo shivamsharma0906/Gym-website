@@ -1,0 +1,23 @@
+/* ===== 3D Card ===== */
+.card-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.card-3d__glare {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+}
+
+.card-3d__content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+}

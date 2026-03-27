@@ -1,0 +1,237 @@
+/* ===== Testimonials ===== */
+.testimonials {
+  padding: var(--section-padding);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.testimonials__header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* Carousel */
+.testimonials__carousel {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.testimonials__track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.testimonials__card {
+  min-width: calc(100% / 3);
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.testimonials__card > div,
+.testimonials__card > p,
+.testimonials__card > .testimonials__card-stars {
+  /* inner content wrapper not needed */
+}
+
+.testimonials__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonials__card > * {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+
+/* Fix: wrap inner content in the card itself */
+.testimonials__card {
+  min-width: calc(100% / 3);
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+/* Override: style is on inner wrapper. Let me simplify */
+.testimonials__card {
+  min-width: calc(100% / 3);
+  padding: 0 12px;
+  box-sizing: border-box;
+  display: block;
+}
+
+.testimonials__card > *:first-child {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-bottom: none;
+}
+
+/* Completely reset card styling approach */
+.testimonials__card {
+  min-width: calc(100% / 3);
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.testimonials__card-stars,
+.testimonials__card-text,
+.testimonials__card-author {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* Apply styling as wrapper via pseudo or inner structure — let's use a different approach */
+/* The card itself IS the visual card */
+.testimonials__card {
+  min-width: calc(100% / 3);
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Inner visual styling */
+.testimonials__card {
+  position: relative;
+}
+
+.testimonials__card::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  z-index: 0;
+}
+
+.testimonials__card:hover::before {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glow);
+}
+
+.testimonials__card-stars,
+.testimonials__card-text,
+.testimonials__card-author {
+  position: relative;
+  z-index: 1;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.testimonials__card-stars {
+  padding-top: 32px;
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.testimonials__card-star {
+  font-size: 0.9rem;
+}
+
+.testimonials__card-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.testimonials__card-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 32px;
+}
+
+.testimonials__card-avatar {
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(230, 57, 70, 0.1);
+  border-radius: var(--radius-full);
+}
+
+.testimonials__card-name {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.testimonials__card-role {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Controls */
+.testimonials__controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.testimonials__btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.testimonials__btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(230, 57, 70, 0.1);
+}
+
+.testimonials__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.testimonials__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.testimonials__dot--active {
+  background: var(--primary);
+  border-color: var(--primary);
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .testimonials__card {
+    min-width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonials__card {
+    min-width: 100%;
+  }
+}
