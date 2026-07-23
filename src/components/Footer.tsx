@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import logoImg from '../assets/logo.png';
 import './Footer.css';
 
 const Footer = () => {
@@ -51,7 +52,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="ft__brand">
             <a href="#hero" className="ft__logo">
-              <span className="ft__logo-icon">⚡</span>
+              <img src={logoImg} alt="LIFT & FIT Logo" className="ft__logo-img" />
               <span className="ft__logo-text">
                 LIFT &<span className="ft__logo-accent"> FIT</span>
               </span>

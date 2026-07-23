@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import logoImg from '../assets/logo.png';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -31,7 +32,7 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`} id="navbar">
       <div className="navbar__container container">
         <a href="#hero" className="navbar__logo">
-          <span className="navbar__logo-icon">⚡</span>
+          <img src={logoImg} alt="LIFT & FIT Logo" className="navbar__logo-img" />
           <span className="navbar__logo-text">
             LIFT &<span className="navbar__logo-accent"> FIT</span>
           </span>

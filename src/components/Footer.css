@@ -93,9 +93,11 @@
   position: relative;
 }
 
-.ft__logo-icon {
-  font-size: 1.8rem;
-  filter: drop-shadow(0 0 10px rgba(230,57,70,0.6));
+.ft__logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(255, 0, 38, 0.6));
 }
 
 .ft__logo-text {

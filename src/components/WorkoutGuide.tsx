@@ -257,8 +257,8 @@ const WorkoutGuide = () => {
       {/* ─── Background ─── */}
       <canvas className="wg__canvas" id="wgCanvas" />
       <div className="wg__bg">
-        <div className="wg__bg-orb wg__bg-orb--1" style={{ background: current.color }} />
-        <div className="wg__bg-orb wg__bg-orb--2" style={{ background: current.color }} />
+        <div className="wg__bg-orb wg__bg-orb--1" style={{ background: 'var(--primary)' }} />
+        <div className="wg__bg-orb wg__bg-orb--2" style={{ background: 'var(--primary)' }} />
         <div className="wg__bg-grid" />
       </div>
       <div className="wg__left-bar" style={{ background: current.color }} />

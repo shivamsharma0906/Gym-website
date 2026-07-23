@@ -30,9 +30,16 @@
   z-index: 1001;
 }
 
-.navbar__logo-icon {
-  font-size: 1.5rem;
-  filter: drop-shadow(0 0 8px rgba(230, 57, 70, 0.5));
+.navbar__logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255, 0, 38, 0.6));
+  transition: transform 0.3s ease;
+}
+
+.navbar__logo:hover .navbar__logo-img {
+  transform: scale(1.08) rotate(-3deg);
 }
 
 .navbar__logo-text {

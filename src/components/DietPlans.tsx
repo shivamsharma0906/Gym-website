@@ -367,8 +367,8 @@ const DietPlans = () => {
     <section className="dp" id="diet-plans" ref={sectionRef} key={`${dietType}-${activePlan}`}>
       {/* BG */}
       <div className="dp__bg">
-        <div className="dp__bg-orb dp__bg-orb--1" style={{ background: plan.color }} />
-        <div className="dp__bg-orb dp__bg-orb--2" style={{ background: plan.accent }} />
+        <div className="dp__bg-orb dp__bg-orb--1" style={{ background: 'var(--primary)' }} />
+        <div className="dp__bg-orb dp__bg-orb--2" style={{ background: 'var(--primary)' }} />
         <div className="dp__bg-grid" />
       </div>
       <div className="dp__left-bar" style={{ background: plan.color }} />

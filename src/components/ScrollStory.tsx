@@ -24,7 +24,7 @@ const sections: StorySection[] = [
       { label: 'Equipment', value: '150+' },
       { label: 'Sqft Space', value: '20K' },
     ],
-    bgGradient: 'radial-gradient(ellipse at 50% 50%, rgba(230, 57, 70, 0.12) 0%, transparent 70%)',
+    bgGradient: 'radial-gradient(ellipse at 50% 50%, rgba(255, 0, 38, 0.1) 0%, transparent 70%)',
   },
   {
     tag: 'Step 02',
@@ -38,7 +38,7 @@ const sections: StorySection[] = [
       { label: 'Trainers', value: '50+' },
       { label: 'Success Rate', value: '98%' },
     ],
-    bgGradient: 'radial-gradient(ellipse at 50% 50%, rgba(247, 127, 0, 0.12) 0%, transparent 70%)',
+    bgGradient: 'radial-gradient(ellipse at 50% 50%, rgba(255, 0, 38, 0.1) 0%, transparent 70%)',
   },
   {
     tag: 'Step 03',
@@ -52,7 +52,7 @@ const sections: StorySection[] = [
       { label: 'Avg. Results', value: '12 wk' },
       { label: 'Rating', value: '4.9★' },
     ],
-    bgGradient: 'radial-gradient(ellipse at 50% 50%, rgba(46, 196, 182, 0.12) 0%, transparent 70%)',
+    bgGradient: 'radial-gradient(ellipse at 50% 50%, rgba(255, 0, 38, 0.1) 0%, transparent 70%)',
   },
 ];
 

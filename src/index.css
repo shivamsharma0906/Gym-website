@@ -9,20 +9,20 @@
 
 :root {
   /* Primary Colors */
-  --primary: #e63946;
-  --primary-dark: #c1121f;
-  --primary-light: #ff6b6b;
+  --primary: #ff0026;
+  --primary-dark: #cc001e;
+  --primary-light: #ff455b;
 
   /* Accent Colors */
-  --accent: #f77f00;
-  --accent-light: #fcbf49;
+  --accent: #ff5500;
+  --accent-light: #ff8833;
 
   /* Dark Theme */
   --bg-primary: #060606;
-  --bg-secondary: #0a0a0a;
-  --bg-tertiary: #111111;
-  --bg-card: #151515;
-  --bg-card-hover: #1e1e1e;
+  --bg-secondary: #060606;
+  --bg-tertiary: #060606;
+  --bg-card: #121212;
+  --bg-card-hover: #1a1a1a;
 
   /* Text */
   --text-primary: #ffffff;
@@ -30,21 +30,21 @@
   --text-muted: #666666;
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #e63946, #f77f00);
+  --gradient-primary: linear-gradient(135deg, #ff0026, #ff4500);
   --gradient-dark: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
   --gradient-card: linear-gradient(145deg, #1a1a1a, #111111);
-  --gradient-glow: radial-gradient(circle, rgba(230, 57, 70, 0.15) 0%, transparent 70%);
+  --gradient-glow: radial-gradient(circle, rgba(255, 0, 38, 0.22) 0%, transparent 70%);
 
   /* Borders */
   --border-subtle: rgba(255, 255, 255, 0.06);
   --border-light: rgba(255, 255, 255, 0.1);
-  --border-accent: rgba(230, 57, 70, 0.3);
+  --border-accent: rgba(255, 0, 38, 0.35);
 
   /* Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 30px rgba(230, 57, 70, 0.2);
+  --shadow-glow: 0 0 35px rgba(255, 0, 38, 0.4);
 
   /* Spacing */
   --section-padding: 100px 0;

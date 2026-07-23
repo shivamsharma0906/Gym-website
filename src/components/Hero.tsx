@@ -1,14 +1,7 @@
-// Hero.tsx — Awwwards-Level Interactive Experience
-import { useEffect, useRef, useState } from 'react';
-import {
-  motion, useSpring, useTransform, useMotionValue, useMotionTemplate,
-} from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { motion, useSpring, useMotionValue } from 'framer-motion';
+import heroRunner from '../assets/hero-runner.png';
 import './Hero.css';
-
-/* ── Constants ── */
-const RADIUS       = 28;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
-const CHARS        = '!<>-_\\/[]{}—=+*^?#@$%&~|';
 
 /* ── Variants ── */
 const staggerContainer = {
@@ -18,39 +11,6 @@ const staggerContainer = {
 const fadeUp = {
   hidden : { opacity: 0, y: 36 },
   visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 80, damping: 20 } },
-};
-const fadeRight = {
-  hidden : { opacity: 0, x: 50 },
-  visible: { opacity: 1, x: 0, transition: { type: 'spring' as const, stiffness: 65, damping: 18, delay: 0.45 } },
-};
-
-/* ── Text Scramble ── */
-interface ScrambleProps { text: string; delay?: number; duration?: number; className?: string; }
-const ScrambleText = ({ text, delay = 0, duration = 1.5, className }: ScrambleProps) => {
-  const [out, setOut] = useState(() =>
-    text.split('').map(c => (c === ' ' ? ' ' : CHARS[0])).join('')
-  );
-  useEffect(() => {
-    let raf = 0;
-    let start: number | null = null;
-    const ms = duration * 1000;
-    const t = setTimeout(() => {
-      const tick = (now: number) => {
-        if (!start) start = now;
-        const p = Math.min((now - start) / ms, 1);
-        const locked = Math.floor(p * text.length);
-        setOut(text.split('').map((ch, i) => {
-          if (ch === ' ') return ' ';
-          if (i < locked) return ch;
-          return CHARS[Math.floor(Math.random() * CHARS.length)];
-        }).join(''));
-        if (p < 1) raf = requestAnimationFrame(tick);
-      };
-      raf = requestAnimationFrame(tick);
-    }, delay * 1000);
-    return () => { clearTimeout(t); cancelAnimationFrame(raf); };
-  }, [text, delay, duration]);
-  return <span className={className}>{out}</span>;
 };
 
 /* ── Magnetic Button ── */
@@ -96,21 +56,7 @@ const MagneticButton = ({ href, children, className, threshold = 90, strength = 
 const Hero = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  /* Global mouse (normalised 0..1) for 3D tilt + glare */
-  const mouseX = useMotionValue(0.5);
-  const mouseY = useMotionValue(0.5);
-  const tiltCfg = { stiffness: 55, damping: 18 };
-  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-12, 12]), tiltCfg);
-  const rotateX = useSpring(useTransform(mouseY, [0, 1], [8,  -8]),  tiltCfg);
-  const glareX  = useTransform(mouseX, [0, 1], ['0%', '100%']);
-  const glareY  = useTransform(mouseY, [0, 1], ['0%', '100%']);
-  const glare   = useMotionTemplate`radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.08) 0%, transparent 55%)`;
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    mouseX.set(e.clientX / window.innerWidth);
-    mouseY.set(e.clientY / window.innerHeight);
-  };
-  const handleMouseLeave = () => { mouseX.set(0.5); mouseY.set(0.5); };
 
   /* ── Canvas: HiDPI + mouse repulsion + motion trail ── */
   useEffect(() => {
@@ -209,24 +155,24 @@ const Hero = () => {
     };
   }, []);
 
-  const floatCards = [
-    { pos: 'card-1', icon: '🔥', label: 'Calories Burned', val: '850 kcal', delta: '↑ 12%' },
-    { pos: 'card-2', icon: '💪', label: 'Workouts Done',   val: '1,247',   delta: '↑ 8%'  },
-    { pos: 'card-3', icon: '⭐', label: 'Rating',          val: '4.9 / 5.0', delta: null  },
-  ];
+
 
   return (
     <section
       className="hero" id="hero"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
     >
       {/* ── Decorative background ── */}
       <canvas ref={canvasRef} className="hero__canvas" aria-hidden="true" />
       <div className="hero__grid-overlay" aria-hidden="true" />
       <div className="hero__red-slash"    aria-hidden="true" />
-      <div className="hero__scan-line"    aria-hidden="true" />
+
       <div className="hero__red-glow"     aria-hidden="true" />
+
+      {/* ── Dynamic Full-Bleed Hero Background Athlete Image ── */}
+      <div className="hero__bg-runner-wrap" aria-hidden="true">
+        <img src={heroRunner} alt="" className="hero__bg-runner-img" />
+        <div className="hero__bg-runner-overlay" />
+      </div>
 
       {/* Film grain SVG */}
       <svg className="hero__grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -254,9 +200,9 @@ const Hero = () => {
           <motion.p className="hero__eyebrow" variants={fadeUp}>Est. 2018 · Mumbai, India</motion.p>
 
           <motion.h1 className="hero__title" variants={fadeUp}>
-            <ScrambleText text="Forge Your"   delay={0.3} duration={1.4} />
-            <ScrambleText text=" Limits."     delay={0.7} duration={1.2} className="hero__title--accent" />
-            <ScrambleText text=" Break Them." delay={1.1} duration={1.1} className="hero__title--outline" />
+            Forge Your
+            <span className="hero__title--accent"> Limits.</span>
+            <span className="hero__title--outline"> Break Them.</span>
           </motion.h1>
 
           <motion.p className="hero__description" variants={fadeUp}>
@@ -292,57 +238,7 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* ── RIGHT COLUMN ── */}
-        <motion.div className="hero__visual" variants={fadeRight} initial="hidden" animate="visible">
-          <div className="hero__orbit hero__orbit--1" aria-hidden="true"><div className="hero__orb-dot" /></div>
-          <div className="hero__orbit hero__orbit--2" aria-hidden="true" />
-          <div className="hero__orbit hero__orbit--3" aria-hidden="true" />
 
-          <div className="hero__hex-frame">
-            <span className="hero__hex-emoji">🏋️</span>
-          </div>
-
-          {/* 3D Holographic Tilt Cards */}
-          {floatCards.map(({ pos, icon, label, val, delta }, idx) => (
-            <motion.div
-              key={pos}
-              className={`hero__float-card hero__float-card--${pos}`}
-              style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: 'spring' as const, stiffness: 80, damping: 16, delay: 0.65 + idx * 0.12 }}
-            >
-              {/* Moving glare / sheen */}
-              <motion.div className="hero__float-glare" style={{ background: glare }} aria-hidden="true" />
-              <span className="hero__float-icon">{icon}</span>
-              <div>
-                <div className="hero__float-label">{label}</div>
-                <div className="hero__float-val">
-                  {val} {delta && <span className="hero__float-delta">{delta}</span>}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-
-          {/* Animated SVG progress ring */}
-          <div className="hero__ring-wrap">
-            <svg width="80" height="80" viewBox="0 0 72 72" style={{ transform: 'rotate(-90deg)' }}>
-              <circle cx="36" cy="36" r={RADIUS} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="4" />
-              <motion.circle
-                cx="36" cy="36" r={RADIUS} fill="none"
-                stroke="#E6001A" strokeWidth="4" strokeLinecap="round"
-                strokeDasharray={CIRCUMFERENCE}
-                initial={{ strokeDashoffset: CIRCUMFERENCE }}
-                animate={{ strokeDashoffset: CIRCUMFERENCE * (1 - 0.85) }}
-                transition={{ duration: 2, ease: 'easeOut', delay: 1.2 }}
-              />
-            </svg>
-            <div className="hero__ring-label">
-              <span className="hero__ring-num">85%</span>
-              <span className="hero__ring-txt">Goal</span>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
